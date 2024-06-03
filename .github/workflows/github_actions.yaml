@@ -54,8 +54,12 @@ jobs:
 
     - name: Deploy to Firebase App Distribution
       env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_ACCOUNT_SERVICE }}
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       run: |
+        echo "$FIREBASE_ACCOUNT_SERVICE" > firebase-service-account-key.json
+        export GOOGLE_APPLICATION_CREDENTIALS="./firebase-service-account-key.json"
+
         firebase appdistribution:distribute \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
