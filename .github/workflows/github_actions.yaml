@@ -34,6 +34,10 @@ jobs:
         with:
           name: release-apk
           path: build/app/outputs/apk/release/app-release.apk
+      - name: Decode google-services.json
+        env: 
+          GOOGLE_SERVICES_JSON: ${{ secrets.FIREBASE_ACCOUNT_SERVICE }}
+        run: echo "$GOOGLE_SERVICES_JSON" > android/app/google-services.json
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
