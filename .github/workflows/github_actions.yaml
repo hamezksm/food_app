@@ -36,16 +36,13 @@ jobs:
 
     - name: Build APK
       run: |
-        flutter build apk --release \
-        --no-shrink \
-        --target-platform android-arm,android-arm64,android-x64 \
-        --split-per-abi
-      
-    - name: Upload APKs
+        flutter build apk --release
+
+    - name: Upload APK
       uses: actions/upload-artifact@v2
       with:
-        name: apks
-        path: build/app/outputs/flutter-apk/*.apk
+        name: apk
+        path: build/app/outputs/flutter-apk/app-release.apk
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
@@ -55,10 +52,6 @@ jobs:
     - name: Install Firebase CLI
       run: npm install -g firebase-tools
 
-    - name: List APK Files
-      run: ls -l build/app/outputs/flutter-apk/
-
-    
     - name: Deploy to Firebase App Distribution
       env:
         FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
@@ -68,7 +61,7 @@ jobs:
         FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
         GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-service-account.json
       run: |
-       # Create the service account JSON file
+        # Create the service account JSON file
         echo '{
           "type": "service_account",
           "project_id": "'"$PROJECT_ID"'",
@@ -79,27 +72,12 @@ jobs:
           "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs"
         }' > ${{ github.workspace }}/firebase-service-account.json
 
-        # Double-check the content of the file (BE CAREFUL NOT TO EXPOSE THIS IN PUBLIC LOGS)
-        # cat ${{ github.workspace }}/firebase-service-account.json
-
         # Use the service account JSON for authentication
         export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/firebase-service-account.json"
 
-        # Distribute APKs
+        # Distribute APK
         firebase appdistribution:distribute \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
           --release-notes "New version available for testing" \
-          build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk 
-
-        firebase appdistribution:distribute \
-          --app "$FIREBASE_APP_ID" \
-          --groups "testers" \
-          --release-notes "New version available for testing" \
-          build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
-
-        firebase appdistribution:distribute \
-          --app "$FIREBASE_APP_ID" \
-          --groups "testers" \
-          --release-notes "New version available for testing" \
-          "${{ github.workspace }}/build/app/outputs/flutter-apk/app-x86_64-release.apk"
+          "build/app/outputs/flutter-apk/app-release.apk"
