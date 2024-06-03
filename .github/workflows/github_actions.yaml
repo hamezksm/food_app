@@ -56,11 +56,8 @@ jobs:
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
       run: |
-        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk \
-          --release-notes "New version available for testing"
+        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk 
 
-        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-arm64-v8a-release.apk \
-          --release-notes "New version available for testing"
+        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-arm64-v8a-release.apk 
 
-        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-x86_64-release.apk \
-          --release-notes "New version available for testing"
+        firebase appdistribution:distribute build/app/outputs/flutter-apk/app-x86_64-release.apk 
