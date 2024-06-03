@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:food_app/core/constants/api.dart';
-import 'package:food_app/core/services/database/database_service.dart';
-import 'package:food_app/models/product.dart';
+import 'package:foodapp/core/constants/api.dart';
+import 'package:foodapp/core/services/database/database_service.dart';
+import 'package:foodapp/models/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
@@ -59,7 +59,8 @@ class ApiService {
           'ApiService is not initialized. Call initialize() first.');
     }
 
-    final List<Future<void>> fetchTasks = ids.map((id) => fetchProduct(id)).toList();
+    final List<Future<void>> fetchTasks =
+        ids.map((id) => fetchProduct(id)).toList();
     await Future.wait(fetchTasks);
   }
 }

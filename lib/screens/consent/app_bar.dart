@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
-// import 'package:food_app/screens/consent/colors.dart';
-// import 'package:food_app/screens/consent/shopping_cart.dart';
+// import 'package:foodapp/screens/consent/colors.dart';
+// import 'package:foodapp/screens/consent/shopping_cart.dart';
 
 // PreferredSizeWidget appbar() {
 //   return AppBar(
@@ -20,8 +20,8 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:food_app/core/services/state/product_cart.dart';
-import 'package:food_app/screens/cart.dart';
+import 'package:foodapp/core/services/state/product_cart.dart';
+import 'package:foodapp/screens/cart.dart';
 
 PreferredSizeWidget appbar(Cart cart, BuildContext context) {
   return AppBar(

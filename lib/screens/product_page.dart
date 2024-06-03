@@ -1,12 +1,12 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:food_app/core/services/database/database_service.dart';
-import 'package:food_app/core/services/state/product_cart.dart';
-import 'package:food_app/models/product.dart';
-import 'package:food_app/screens/consent/app_bar.dart';
-import 'package:food_app/screens/consent/colors.dart';
-import 'package:food_app/screens/widgets/product_card.dart';
+import 'package:foodapp/core/services/database/database_service.dart';
+import 'package:foodapp/core/services/state/product_cart.dart';
+import 'package:foodapp/models/product.dart';
+import 'package:foodapp/screens/consent/app_bar.dart';
+import 'package:foodapp/screens/consent/colors.dart';
+import 'package:foodapp/screens/widgets/product_card.dart';
 import 'package:provider/provider.dart';
 
 class ProductPage extends StatefulWidget {

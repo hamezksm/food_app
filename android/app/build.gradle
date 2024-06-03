@@ -1,12 +1,22 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    // Firebase configuration
+    id "com.google.firebase.appdistribution"
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
 }
 
 android {
-    namespace = "com.example.food_app"
+    namespace = "com.hamezksm.foodapp"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +31,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.food_app"
+        applicationId = "com.hamezksm.foodapp"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
@@ -32,9 +42,11 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
+            firebaseAppDistribution {
+                serviceCredentialsFile="google-services.json"
+                releaseNotesFile="release_notes.txt"
+                testers="dmwaura@dynamicmobility.co.ke, hamezksm@gmail.com, jamcav097@gmail.com, milleradulu@gmail.com, josiah@tenziapps.com"
+            }
         }
     }
 }

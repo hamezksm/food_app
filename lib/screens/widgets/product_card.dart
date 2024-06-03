@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/models/product.dart';
-import 'package:food_app/core/services/state/product_cart.dart';
+import 'package:foodapp/models/product.dart';
+import 'package:foodapp/core/services/state/product_cart.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -39,9 +39,8 @@ class ProductCard extends StatelessWidget {
               width: 120,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: product.image != null
-                      ? NetworkImage(product.image!)
-                      : const AssetImage('assets/images/image-not-found.png'),
+                  image: NetworkImage(product.image!),
+                  // : const AssetImage('assets/images/image-not-found.png'),
                   fit: BoxFit.cover,
                   onError: (Object exception, StackTrace? stackTrace) =>
                       Image.asset(

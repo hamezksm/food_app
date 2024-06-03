@@ -1,4 +1,4 @@
-name: food_app
+name: foodapp
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -47,6 +47,7 @@ dependencies:
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1
   provider: ^6.1.2
+  firebase_core: ^2.32.0
 
 dev_dependencies:
   flutter_test:

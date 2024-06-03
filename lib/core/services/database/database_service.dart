@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:food_app/core/services/network/api_service.dart';
-import 'package:food_app/models/product.dart';
+import 'package:foodapp/core/services/network/api_service.dart';
+import 'package:foodapp/models/product.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 

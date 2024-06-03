@@ -33,13 +33,13 @@ Follow these steps to get the project up and running:
 1. **Clone the repository**:
 
     ```sh
-    git clone https://github.com/hamezksm/food_app.git
+    git clone https://github.com/hamezksm/foodapp.git
     ```
 
 2. **Navigate to the project directory**:
 
     ```sh
-    cd food_app
+    cd foodapp
     ```
 
 3. **Install dependencies**:
@@ -83,7 +83,7 @@ Here are some common issues you might encounter and how to resolve them:
     - If you encounter this issue while cloning the repository, ensure your SSH keys are correctly configured with GitHub or use HTTPS to clone the repo:
 
       ```sh
-      git clone https://github.com/hamezksm/food_app.git
+      git clone https://github.com/hamezksm/foodapp.git
       ```
 
 5. **Code signing issues (iOS)**:

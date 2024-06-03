@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:food_app/app.dart';
-import 'package:food_app/core/services/database/database_service.dart';
-import 'package:food_app/core/services/network/api_service.dart';
+import 'package:foodapp/app.dart';
+import 'package:foodapp/core/services/database/database_service.dart';
+import 'package:foodapp/core/services/network/api_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/core/services/state/product_cart.dart';
-import 'package:food_app/screens/product_page.dart';
+import 'package:foodapp/core/services/state/product_cart.dart';
+import 'package:foodapp/screens/product_page.dart';
 import 'package:provider/provider.dart';
 
 class SuccessPage extends StatelessWidget {

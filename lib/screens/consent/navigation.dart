@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/core/services/database/database_service.dart';
-import 'package:food_app/screens/cart.dart';
-import 'package:food_app/screens/consent/colors.dart';
-import 'package:food_app/screens/product_page.dart';
+import 'package:foodapp/core/services/database/database_service.dart';
+import 'package:foodapp/screens/cart.dart';
+import 'package:foodapp/screens/consent/colors.dart';
+import 'package:foodapp/screens/product_page.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});

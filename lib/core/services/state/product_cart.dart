@@ -1,4 +1,4 @@
-import 'package:food_app/models/product.dart';
+import 'package:foodapp/models/product.dart';
 import 'package:mobx/mobx.dart';
 
 part 'product_cart.g.dart';
