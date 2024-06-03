@@ -58,7 +58,7 @@ jobs:
         FIREBASE_REFRESH_TOKEN: ${{ secrets.FIREBASE_REFRESH_TOKEN }}
       run: |
         # Authenticate with refresh token
-        firebase login:ci --token "$FIREBASE_REFRESH_TOKEN"
+        firebase deploy --token "$FIREBASE_REFRESH_TOKEN"
         
         echo "APK files:"
         ls -l build/app/outputs/flutter-apk/
