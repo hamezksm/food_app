@@ -17,7 +17,7 @@ class _NavigationState extends State<Navigation> {
   }
 
   int index = 0;
-  List screen = [const ProductPage(), CartPage()];
+  List screen = [const ProductPage(), const CartPage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -42,7 +42,7 @@ PreferredSizeWidget appbar(Cart cart, BuildContext context) {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CartPage(),
+                      builder: (context) => const CartPage(),
                     ),
                   );
                 },
