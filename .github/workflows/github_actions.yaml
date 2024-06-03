@@ -63,9 +63,9 @@ jobs:
         FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
       run: |
         # Extract required fields from the service account JSON
-        PROJECT_ID=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.project_id')
-        PRIVATE_KEY=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.private_key')
-        CLIENT_EMAIL=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.client_email')
+        PROJECT_ID=${{ secrets.PROJECT_ID }}
+        PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}
+        CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }}
 
         # Create a minimal JSON with only the required fields
         echo '{
