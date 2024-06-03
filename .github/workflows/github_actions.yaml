@@ -58,28 +58,13 @@ jobs:
     - name: List APK Files
       run: ls -l build/app/outputs/flutter-apk/
 
-    - name: Prepare Service Account
-      env:
-        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-      run: |
-        # Extract required fields from the service account JSON
-        PROJECT_ID=${{ secrets.PROJECT_ID }}
-        PRIVATE_KEY=${{ secrets.PRIVATE_KEY }}
-        CLIENT_EMAIL=${{ secrets.CLIENT_EMAIL }}
-
-        # Create a minimal JSON with only the required fields
-        echo '{
-          "type": "service_account",
-          "project_id": "'"$PROJECT_ID"'",
-          "private_key": "'"$PRIVATE_KEY"'",
-          "client_email": "'"$CLIENT_EMAIL"'"
-        }' > firebase-service-account.json
-
-        # Debug: Print the file (be careful not to expose this in public logs)
-        cat firebase-service-account.json
-
+    
     - name: Deploy to Firebase App Distribution
       env:
+        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        PROJECT_ID: ${{ secrets.PROJECT_ID }}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
         FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
         GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-service-account.json
       run: |
