@@ -102,4 +102,4 @@ jobs:
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
           --release-notes "New version available for testing" \
-          ${{ github.workspace }}/build/app/outputs/flutter-apk/app-x86_64-release.apk
+          "/build/app/outputs/flutter-apk/app-x86_64-release.apk"
