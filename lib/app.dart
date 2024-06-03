@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:foodapp/core/services/database/database_service.dart';
 import 'package:foodapp/core/services/state/product_cart.dart';
@@ -27,14 +29,14 @@ class _AppState extends State<App> {
   Future<void> initializeApp() async {
     try {
       products = await isarService.getAllProducts();
-      print("*************PRINTING PRODUCTS****************\n $products");
+      log("*************LOGGING PRODUCTS****************\n $products");
       if (products.isEmpty || products.length != 20) {
         await isarService.generateRandomNumbersAndFetchProducts(20);
       }
       return;
     } catch (e) {
       // Handle initialization error
-      print('Initialization error: $e');
+      log('Initialization error: $e');
     }
   }
 

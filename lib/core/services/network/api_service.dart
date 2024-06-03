@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:foodapp/core/constants/api.dart';
 import 'package:foodapp/core/services/database/database_service.dart';
@@ -23,7 +24,7 @@ class ApiService {
         ),
       );
       _isInitialized = true;
-      print('ApiService initialized successfully');
+      log('ApiService initialized successfully');
     } else {
       throw Exception('API Key not found');
     }
