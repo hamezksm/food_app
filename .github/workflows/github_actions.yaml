@@ -50,7 +50,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '19'
 
     - name: Install Firebase CLI
       run: npm install -g firebase-tools
@@ -58,34 +58,46 @@ jobs:
     - name: List APK Files
       run: ls -l build/app/outputs/flutter-apk/
 
+    - name: Prepare Service Account
+      env:
+        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      run: |
+        # Extract required fields from the service account JSON
+        PROJECT_ID=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.project_id')
+        PRIVATE_KEY=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.private_key')
+        CLIENT_EMAIL=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.client_email')
+
+        # Create a minimal JSON with only the required fields
+        echo '{
+          "type": "service_account",
+          "project_id": "'"$PROJECT_ID"'",
+          "private_key": "'"$PRIVATE_KEY"'",
+          "client_email": "'"$CLIENT_EMAIL"'"
+        }' > firebase-service-account.json
+
+        # Debug: Print the file (be careful not to expose this in public logs)
+        cat firebase-service-account.json
+
     - name: Deploy to Firebase App Distribution
       env:
         FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-service-account.json
       run: |
-        # Extract the token part from the service account JSON
-        FIREBASE_TOKEN=$(echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' | jq -r '.token' || true)
-        
-        if [ -z "$FIREBASE_TOKEN" ]; then
-          echo "Error: Unable to extract token from service account JSON. Using entire JSON as token."
-          FIREBASE_TOKEN='${{ secrets.FIREBASE_SERVICE_ACCOUNT }}'
-        fi
-        
-        # Distribute APKs using the extracted token
+        # Use the minimal service account JSON
+        export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/firebase-service-account.json"
+
+        # Distribute APKs
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
-          --release-notes "New version available for testing" \
-          --token "$FIREBASE_TOKEN"
+          --release-notes "New version available for testing"
 
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-arm64-v8a-release.apk \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
-          --release-notes "New version available for testing" \
-          --token "$FIREBASE_TOKEN"
+          --release-notes "New version available for testing"
 
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-x86_64-release.apk \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
-          --release-notes "New version available for testing" \
-          --token "$FIREBASE_TOKEN"
+          --release-notes "New version available for testing"
