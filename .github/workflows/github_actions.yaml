@@ -70,8 +70,9 @@ jobs:
     - name: Deploy to Firebase App Distribution
       env:
         GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       run: |
-        echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > ${{ github.workspace }}/firebase-service-account.json
+        export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/firebase-service-account.json"
     
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk \
           --app $FIREBASE_APP_ID \
