@@ -54,12 +54,14 @@ jobs:
 
     - name: Deploy to Firebase App Distribution
       env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        FIREBASE_ACCOUNT_SERVICE: ${{ secrets.FIREBASE_ACCOUNT_SERVICE }}
         FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
       run: |
-        firebase appdistribution:distribute \
+        echo "$FIREBASE_ACCOUNT_SERVICE" > firebase-service-account-key.json
+        
+        npx firebase-tools@11.30.0 appdistribution:distribute \
           --app "$FIREBASE_APP_ID" \
-          --token "$FIREBASE_TOKEN" \
           --groups "testers" \
           --release-notes "New version available for testing" \
+          --service-account-file "./firebase-service-account-key.json" \
           "build/app/outputs/flutter-apk/app-release.apk"
