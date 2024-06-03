@@ -61,7 +61,6 @@ jobs:
         
         npx firebase-tools@11.30.0 appdistribution:distribute \
           --app "$FIREBASE_APP_ID" \
-          --groups "testers" \
+          --testers "testers" \
           --release-notes "New version available for testing" \
-          --service-account-file "./firebase-service-account-key.json" \
           "build/app/outputs/flutter-apk/app-release.apk"
