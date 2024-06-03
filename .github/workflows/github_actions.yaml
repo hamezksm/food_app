@@ -54,28 +54,8 @@ jobs:
 
     - name: Deploy to Firebase App Distribution
       env:
-        FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        PROJECT_ID: ${{ secrets.PROJECT_ID }}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
-        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL }}
-        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
-        GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/firebase-service-account.json
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
       run: |
-        # Create the service account JSON file
-        echo '{
-          "type": "service_account",
-          "project_id": "'"$PROJECT_ID"'",
-          "private_key": "'"$PRIVATE_KEY"'",
-          "client_email": "'"$CLIENT_EMAIL"'",
-          "token_uri": "https://oauth2.googleapis.com/token",
-          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs"
-        }' > ${{ github.workspace }}/firebase-service-account.json
-
-        # Use the service account JSON for authentication
-        export GOOGLE_APPLICATION_CREDENTIALS="${{ github.workspace }}/firebase-service-account.json"
-
-        # Distribute APK
         firebase appdistribution:distribute \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
