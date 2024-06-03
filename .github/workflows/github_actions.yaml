@@ -54,8 +54,7 @@ jobs:
 
     - name: Deploy to Firebase App Distribution
       env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.FIREBASE_TOKEN }}
       run: |
         firebase appdistribution:distribute build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk \
           --app $FIREBASE_APP_ID \

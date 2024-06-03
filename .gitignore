@@ -44,3 +44,6 @@ app.*.map.json
 
 # Environment variables
 .env
+
+# Google app credentials
+food-app-a919a-firebase-adminsdk-fa9i1-6ec257bbc5.json
