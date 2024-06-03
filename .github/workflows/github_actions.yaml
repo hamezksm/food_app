@@ -54,14 +54,15 @@ jobs:
 
     - name: Deploy to Firebase App Distribution
       env:
-        FIREBASE_SERVICE_ACCOUNT_KEY: ${{ secrets.FIREBASE_ACCOUNT_SERVICE }}
         FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        SERVICE_ACCOUNT_KEY_PATH: ${{ github.workspace }}/firebase-service-account-key.json
+        APK_PATH: ${{ github.workspace }}/build/app/outputs/flutter-apk/app-release.apk
       run: |
-        echo "$FIREBASE_ACCOUNT_SERVICE" > firebase-service-account-key.json
-        export GOOGLE_APPLICATION_CREDENTIALS="./firebase-service-account-key.json"
+        echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}' > $SERVICE_ACCOUNT_KEY_PATH
+        export GOOGLE_APPLICATION_CREDENTIALS=$SERVICE_ACCOUNT_KEY_PATH
 
         firebase appdistribution:distribute \
           --app "$FIREBASE_APP_ID" \
           --groups "testers" \
           --release-notes "New version available for testing" \
-          "build/app/outputs/flutter-apk/app-release.apk"
+          "$APK_PATH"
