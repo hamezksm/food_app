@@ -64,6 +64,8 @@ jobs:
         echo "GOOGLE_SERVICE=google-application-credentials.json" >> $GITHUB_ENV
 
     - name: Verify and Deploy APK
+      env:
+        FIREBASE_TOKEN: ${{secrets.FIREBASE_TOKEN}}
       run: |
         echo "APK files:"
         ls -l build/app/outputs/flutter-apk/
