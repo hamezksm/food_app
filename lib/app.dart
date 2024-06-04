@@ -35,7 +35,6 @@ class _AppState extends State<App> {
       }
       return;
     } catch (e) {
-      // Handle initialization error
       log('Initialization error: $e');
     }
   }

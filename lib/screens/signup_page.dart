@@ -28,6 +28,13 @@ class _SignupPageState extends State<SignupPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text(
+              'REGISTER',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 20.0,
+            ),
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'Email'),
@@ -61,16 +68,15 @@ class _SignupPageState extends State<SignupPage> {
                     email: email,
                     password: password,
                   );
-                  // Store other user data as needed
+
                   Box userBox = Hive.box('userBox');
                   userBox.put('email', email);
-                  // Sign-up successful, navigate to the next screen
+
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const ProductPage()));
                 } catch (e) {
-                  // Handle sign-up errors
                   log('Sign-up failed: $e');
                 }
               },

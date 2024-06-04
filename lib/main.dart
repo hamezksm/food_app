@@ -17,7 +17,6 @@ void main() async {
 
   const apiKey = String.fromEnvironment('API_KEY');
 
-  // Store the API key in SharedPreferences
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('API_KEY', apiKey);
 
@@ -26,10 +25,8 @@ void main() async {
 
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
-      // User is not authenticated, navigate to the login screen
       runApp(const App(home: LoginPage()));
     } else {
-      // User is authenticated, navigate to the home screen
       runApp(const App(home: ProductPage()));
     }
   });

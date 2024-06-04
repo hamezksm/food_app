@@ -29,6 +29,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text('LOGIN', textAlign: TextAlign.center,),
+            const SizedBox(
+              height: 20.0,
+            ),
             TextField(
               controller: _emailController,
               decoration: const InputDecoration(labelText: 'Email'),
@@ -62,16 +66,15 @@ class _LoginPageState extends State<LoginPage> {
                     email: email,
                     password: password,
                   );
-                  // Store other user data as needed
+                  
                   Box userBox = Hive.box('userBox');
                   userBox.put('email', email);
-                  // Login successful, navigate to the next screen
+
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const ProductPage()));
                 } catch (e) {
-                  // Handle login errors
                   log('Login failed: $e');
                 }
               },
